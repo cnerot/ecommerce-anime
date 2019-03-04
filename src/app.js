@@ -15,8 +15,21 @@ const Router = {
 	"user": {
 		prefixe:'/api/users',
 		router: require('./user/user.router')
-	}
-}
+	},
+	"product": {
+            prefixe:'/api/product',
+            router: require('./product/product.router')
+        },
+    "panier": {
+        prefixe:'/api/panier',
+        router: require('./panier/panier.router')
+    },
+    "category": {
+        prefixe:'/api/category',
+        router: require('./category/category.router')
+    }
+
+    }
 ;
 
 
@@ -47,7 +60,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //load sub routes
 app.use(Router.user.prefixe, Router.user.router);
-
+app.use(Router.product.prefixe, Router.product.router);
+app.use(Router.panier.prefixe, Router.panier.router);
+app.use(Router.category.prefixe, Router.category.router);
 
 //build doc for default route
 routes = {
