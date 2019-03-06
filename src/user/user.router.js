@@ -2,6 +2,8 @@ const express = require('express');
 const catchErrors = require('express-catch-errors');
 const defaultController = require('../controller');
 
+
+
 const router = express.Router();
 const {
   check,
@@ -12,10 +14,13 @@ const {
   view
 } = Object.assign(require('./user.controller'), defaultController.controller('./user/user.model'));
 
+
 router
   .route('/')
   .get(catchErrors(list))
   .post(catchErrors(create));
+
+
 
 router
   .route('/:id')
