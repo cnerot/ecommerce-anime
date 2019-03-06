@@ -2,6 +2,8 @@ const express = require('express');
 const catchErrors = require('express-catch-errors');
 const defaultController = require('../controller');
 
+const mongoose = require('mongoose');
+
 const router = express.Router();
 const {
     check,
@@ -11,6 +13,24 @@ const {
     update,
     view
 } = Object.assign({}, defaultController.controller('./panier/panier.model'));
+
+
+router
+    .route('/valid/:id')
+    .post((req, res)=>{
+        const Panier = require('./panier.model');
+        var p = Panier.find({ _id : req.params.id}, function(err, result) {
+            console.log(result);
+            console.log(err);
+            res.send(result).catch(()=>{console.log("test")});
+    
+          });
+    
+    });
+
+
+
+
 
 router
     .route('/')

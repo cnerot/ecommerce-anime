@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 
 
 const PanierSchema = new mongoose.Schema({
+    user: {type : String},
     products: [{type: String}],
+    current: {type: boolean}
     // categorie : [{ type: Schema.Types.ObjectId, ref: 'Categorie' }]
 });
 
