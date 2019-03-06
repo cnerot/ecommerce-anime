@@ -24,6 +24,11 @@ export const loginPasswordAction = (text) => ({
 
 export const loginAction = () => {
 /*
+il faudrait pouvoir stoquer le resultat dans la mémoire cache de l'ordi / react
+un dispatch de + 
+
+localStorage.setItem('myData', data);
+
     */
   return dispatch => { 
   	fetch('https://jsonplaceholder.typicode.com/todos/1')

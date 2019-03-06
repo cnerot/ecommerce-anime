@@ -11,6 +11,8 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
+  import { inscriptionEtapeAction, loginEmailAction, loginPasswordAction, loginAction } from '../actions/auth.actions';
+import { connect } from 'react-redux';
 
 import { Link, NavLink } from 'react-router-dom'
 
@@ -40,15 +42,11 @@ class Login extends Component {
     this.setState({theme: newTheme})
   }
 
-  render() {
-    return (
-      <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand to="/"><NavLink to="/">Vente d'animer</NavLink></NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto navContainer" navbar>
-              <NavItem>
+  getUserNav = () => {
+    if(this.props.data.etape == 0) {
+      return(
+         <Nav className="ml-auto navContainer" navbar>
+             <NavItem>
                 <NavLink to="/listeAnime/">liste des animé</NavLink>
               </NavItem>
               <NavItem>
@@ -60,7 +58,44 @@ class Login extends Component {
               <NavItem>
                 <NavLink to="/register">Inscription</NavLink>
               </NavItem>
-            </Nav>
+           </Nav>
+       
+        );
+    }else if(this.props.data.etape == 1) {
+      return(
+         <Nav className="ml-auto navContainer" navbar>
+             <NavItem>
+                <NavLink to="/listeAnime/">liste des animé</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="/">Panier</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="/login">mon compte</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="/register">deconnexion</NavLink>
+              </NavItem>
+           </Nav>
+
+        );
+    }
+  }
+
+  render() {
+
+    console.log(this.props.data.etape);
+    return (
+      <div>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand to="/"><NavLink to="/">Vente d'animer</NavLink></NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+           
+
+              {this.getUserNav()}
+             
+           
           </Collapse>
         </Navbar>
       </div>
@@ -68,4 +103,13 @@ class Login extends Component {
   }
 }
 
-export default Login;
+function mapStateToProps(state) {
+  return {
+    data: {
+      etape: state.authData.etape_auth,
+    }
+  };
+}
+
+
+export default connect(mapStateToProps , {})(Login);
