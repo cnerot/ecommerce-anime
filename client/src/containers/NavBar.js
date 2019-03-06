@@ -13,7 +13,7 @@ import {
   DropdownItem } from 'reactstrap';
 
 import { Link, NavLink } from 'react-router-dom'
-import '../App.css';
+
 class Login extends Component {
 
   constructor(props) {
@@ -55,7 +55,7 @@ class Login extends Component {
                 <NavLink to="/">Panier</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/">Login</NavLink>
+                <NavLink to="/login">Login</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink to="/">Inscription</NavLink>
