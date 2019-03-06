@@ -7,7 +7,7 @@ import { inscriptionEtapeAction, loginEmailAction, loginPasswordAction, loginAct
 import { connect } from 'react-redux';
 
 
-class Login extends Component {
+class Register extends Component {
 
   constructor(props) {
     super(props);
@@ -39,7 +39,7 @@ class Login extends Component {
   render() {
     return (
       <div className="App container mt-5 pt-5">
-        <h4>Connexion</h4>  
+        <h4>Inscription</h4>  
            <Form className="container mt-5 pt-5">
               <FormGroup  row>
                 <Label for="exampleEmail" sm={2}>Email</Label>
@@ -53,7 +53,12 @@ class Login extends Component {
                   <Input onChange={this.handlePasswordChange}  value={this.props.data.password} type="password" name="password" id="examplePassword" placeholder="password placeholder" />
                 </Col>
               </FormGroup>
-
+              <FormGroup row>
+                <Label for="examplePassword" sm={2}>Repeat password</Label>
+                <Col sm={10}>
+                  <Input onChange={this.handlePasswordChange}  value={this.props.data.password} type="password" name="password" id="examplePassword" placeholder="password placeholder" />
+                </Col>
+              </FormGroup>
               <Button onClick={this.formSubmit}> Valider le formulaire </Button>
             </Form>
       </div>
@@ -70,8 +75,5 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = {
- loginAction,
-};
 
-export default connect(mapStateToProps , {loginEmailAction, loginPasswordAction, loginAction})(Login);
+export default connect(mapStateToProps , {})(Register);

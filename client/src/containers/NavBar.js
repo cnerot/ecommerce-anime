@@ -49,7 +49,7 @@ class Login extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto navContainer" navbar>
               <NavItem>
-                <NavLink to="/components/">liste des animé</NavLink>
+                <NavLink to="/listeAnime/">liste des animé</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink to="/">Panier</NavLink>
@@ -58,7 +58,7 @@ class Login extends Component {
                 <NavLink to="/login">Login</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/">Inscription</NavLink>
+                <NavLink to="/register">Inscription</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
