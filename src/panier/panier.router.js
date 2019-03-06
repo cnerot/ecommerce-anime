@@ -12,20 +12,17 @@ const {
     list,
     update,
     view
-} = Object.assign({}, defaultController.controller('./panier/panier.model'));
-
+} = Object.assign({}, defaultController.controller('./panier/panier.model'), require('./panier.controller'));
 
 router
     .route('/valid/:id')
     .post((req, res)=>{
         const Panier = require('./panier.model');
-        var p = Panier.find({ _id : req.params.id}, function(err, result) {
-            console.log(result);
-            console.log(err);
-            res.send(result).catch(()=>{console.log("test")});
-    
-          });
-    
+        var p = Panier.findOne({ _id : req.params.id, current: true}, function(err, result) {
+            result.current = false;
+            result.save();
+            res.send(result);
+        });
     });
 
 
