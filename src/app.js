@@ -6,8 +6,9 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const User = require('./user/user.model');
 
-var passport = require('passport');
-var jwt = require('jsonwebtoken');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const exjwt = require('express-jwt');
 
 
 
@@ -69,22 +70,31 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
+//handle auth
+
+
+const jwtMW = exjwt({
+    secret: 'lolmdr'
+});
+
 
 //load sub routes
-app.use(Router.user.prefixe, Router.user.router);
-app.use(Router.product.prefixe, Router.product.router);
-app.use(Router.panier.prefixe, Router.panier.router);
-app.use(Router.category.prefixe, Router.category.router);
+app.use(Router.user.prefixe,jwtMW, Router.user.router);
+app.use(Router.product.prefixe,jwtMW, Router.product.router);
+app.use(Router.panier.prefixe,jwtMW, Router.panier.router);
+app.use(Router.category.prefixe,jwtMW, Router.category.router);
 // passport
 app.use(passport.initialize());
+
+
 
 
 require('./user/passport')(passport);
 
 
-
 // Enregistrement
 app.post('/register', function(req, res) {
+	console.log(req.body)
     if(!req.body.email || !req.body.password) {
         res.json({ success: false, message: 'Please enter email and password.' });
     } else {
@@ -165,7 +175,6 @@ for (var key in Router) {
 		routes[key] = route;
     }
 }
-
 
 //Default route
 app.get('/', (req, res) => {
