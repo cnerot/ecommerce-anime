@@ -5,11 +5,18 @@ import App from './App';
 import { GetRoutes } from './Router';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import portalApp from './reducers/reducers';
+
+const store = createStore(portalApp);
 
 ReactDOM.render(
+  <Provider store={store}>
 	<BrowserRouter>
 		<GetRoutes />
-	</BrowserRouter>,
+	</BrowserRouter>
+  </Provider>,
 	 document.getElementById('root')
 	);
 
