@@ -21,6 +21,10 @@ mongoose.connection.on('error', (err) => {
 });
 
 require('./user/user.model');
+require('./product/product.model');
+require('./panier/panier.model');
+require('./category/category.model');
+
 
 app.listen(config.PORT, () => {
   Object.keys(config).forEach((key) => winston.info(`${key}: ${config[key]}`));
