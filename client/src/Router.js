@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { Route, Switch } from "react-router-dom";
-import Home from './App';
-// when location = { pathname: '/about' }
-function Router() {
-	return (
-		<Switch>
-		  <Route exact path="/" component={Home} />
-		  <Route path="/about" component={Home} />
-		  <Route path="/contact" component={Home} />
-		  {/* when none of the above match, <NoMatch> will be rendered */}
-		  <Route component={Home} />
-		</Switch>
-		);
+import Home from  './App';
+import Login from './containers/Login'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
+function GetRoutes () {
+	return(
+		<Router>
+		  <div>
+		    <Route exact path="/" component={Home}/>
+		    <Route path="/login" component={Login}/>
+		  </div>
+		</Router>
+		);
 }
+
+export { GetRoutes };
