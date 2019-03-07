@@ -12,7 +12,11 @@ const {
     update,
     view,
     addToCart
-} = Object.assign({}, defaultController.controller('./product/product.model'));
+} = Object.assign({}, defaultController.controller('./product/product.model'), require('./product.controller'));
+
+router
+    .route('/addToCart/:id')
+    .post(catchErrors(check), catchErrors(addToCart));
 
 router
     .route('/')

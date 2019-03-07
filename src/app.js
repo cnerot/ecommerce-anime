@@ -35,9 +35,7 @@ const Router = {
         prefixe:'/api/category',
         router: require('./category/category.router')
     }
-
-    }
-;
+};
 
 
 

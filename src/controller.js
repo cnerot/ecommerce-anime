@@ -2,13 +2,23 @@ module.exports.controller = (model_path) => {
 	const Model = require(model_path);
 	return {
     adminCheck: async (req, res, next) => {
-        const user = req.user;
-        console.log(user);
-        if (user.role !== "Admin") {
-          throw Error('Must Be Admin');
-        }
+        const User = require('./user/user.model')
+        User.findOne({ email : req.user.email}, function(err, result) {
+          if (result === null || result.role !== "Admin") {
+            throw Error('Must Be Admin');
+          }
+        });
         next();
-        
+    },
+
+    userCheck: async (req, res, next) => {
+        const User = require('./user/user.model')
+        User.findOne({ email : req.user.email}, function(err, result) {
+          if (result === null) {
+            throw Error('Must Be Connected');
+          }
+        });
+        next();
     },
     check: async (req, res, next) => {
         const model = await Model.findById(req.params.id);
