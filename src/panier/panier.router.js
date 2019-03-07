@@ -8,7 +8,6 @@ const router = express.Router();
 const {
     adminCheck,
     check,
-    create,
     remove,
     list,
     update,
@@ -23,7 +22,6 @@ router
 router
     .route('/')
     .get(catchErrors(adminCheck), catchErrors(list))
-    .post(catchErrors(create));
 
 router
     .route('/:id')
