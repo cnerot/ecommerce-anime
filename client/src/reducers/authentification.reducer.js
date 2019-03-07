@@ -60,9 +60,10 @@ const authReducer = (state = defaultState, action) => {
     }
     break;
     case DECONNEXION_ACTION:
-
+  localStorage.removeItem('token')
     return {
       ...state,
+      token: "",
       etape_auth: 0,
     }
     break;
