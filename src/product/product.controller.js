@@ -36,7 +36,7 @@ module.exports.addToCart = async (req, res) => {
 			}
 		}
         if (add_product_to_cart){
-        	panier.products.push({id:product._id, qty:1});
+        	panier.products.push({id:product, qty:1});
         }
   		panier.save();
   		res.json(panier);
