@@ -10,7 +10,6 @@ module.exports.controller = (model_path) => {
         });
         next();
     },
-
     userCheck: async (req, res, next) => {
         const User = require('./user/user.model')
         User.findOne({ email : req.user.email}, function(err, result) {

@@ -37,13 +37,6 @@ const Router = {
     }
 };
 
-
-
-
-
-
-
-
 //prepare cross origin security options
 var whitelist = ['http://example1.com', 'http://example2.com']
 var corsOptions = {
@@ -72,7 +65,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 const jwtMW = exjwt({
-    secret: 'lolmdr'
+    secret: 'lolmdr',
+    credentialsRequired: false
 });
 
 

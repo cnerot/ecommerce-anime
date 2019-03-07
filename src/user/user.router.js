@@ -7,13 +7,21 @@ const defaultController = require('../controller');
 const router = express.Router();
 const {
   adminCheck,
+  userCheck,
   check,
   create,
   remove,
   list,
   update,
-  view
+  view,
+  currentUser
 } = Object.assign(require('./user.controller'), defaultController.controller('./user/user.model'));
+
+
+router
+  .route('/currentUser')
+  .get(catchErrors(userCheck), catchErrors(currentUser))
+
 
 
 router
