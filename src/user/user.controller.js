@@ -27,6 +27,7 @@ module.exports.currentUser = async (req, res) => {
         if(result == null){
 			throw Error("Not connected")
 		} else {
+			delete result.password;
 			res.json(result);
 		}
     });
