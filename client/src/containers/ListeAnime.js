@@ -35,9 +35,16 @@ class ListeAnime extends Component {
   }
 
 
-  valider(arg){
-    
-console.log(arg);
+  validertoto(arg){
+
+
+    fetch(`http://0.0.0.0:3000/api/product/addToCart/${arg}`, {
+      method: 'post',
+    }).then(function(response) {
+      console.log(response);
+      return response.json();
+    });
+
 
   }
 
@@ -45,24 +52,22 @@ console.log(arg);
     const { items } = this.state;
     return (
 
-
-
       <div className="App container mt-5 pt-5">
 
 <div class="container">
 <div class="row">
       {this.state.items.map( item=>
-        
+ <div class="col-sm-4">       
   <Card  key={item.name}>
     <CardImg top width="100%" src="https://www.nautiljon.com/images/perso/00/17/vegeta_1771.jpg?1525613735" alt="Card image cap" />
       <CardBody>
-        <CardTitle>{item._id || "no name"}</CardTitle>
+        <CardTitle>{item.name || "no name"}</CardTitle>
         <CardSubtitle>{item.price || "no stoke"}</CardSubtitle>
         <CardText>{item.description || "no stoke"}</CardText>
-        <Button onClick={(item) => this.valider(item._id)} >ajouter au pannier</Button>
+        <Button onClick={() => this.validertoto(item._id )} >ajouter au pannier</Button>
       </CardBody>
     </Card>
-    
+    </div>
         )}
 </div>
 </div>

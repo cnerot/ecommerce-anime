@@ -27,13 +27,15 @@ class Login extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      dropdownOpen: false
     };
   }
 
  toggle() {
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !this.state.isOpen,
+      dropdownOpen: !this.state.dropdownOpen
     });
   }
 
@@ -57,6 +59,9 @@ class Login extends Component {
               </NavItem>
               <NavItem>
                 <NavLink to="/register">Inscription</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="/addProduct">ajouter un produit</NavLink>
               </NavItem>
            </Nav>
        
