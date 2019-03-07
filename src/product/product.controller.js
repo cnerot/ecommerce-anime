@@ -2,9 +2,7 @@ const Product = require('./product.model');
 
 module.exports.create = async (req, res) => {
 	const product = new Product(req.body);
-
-	//check name not null
-
+	
 	//check category exists
 
 	//check price > 0

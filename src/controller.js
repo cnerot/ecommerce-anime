@@ -3,6 +3,9 @@ module.exports.controller = (model_path) => {
 	return {
     adminCheck: async (req, res, next) => {
         const User = require('./user/user.model')
+        if (req.user == undefined){
+          throw Error('Must Be Admin');
+        }
         User.findOne({ email : req.user.email}, function(err, result) {
           if (result === null || result.role !== "Admin") {
             throw Error('Must Be Admin');
