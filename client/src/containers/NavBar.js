@@ -10,8 +10,9 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
-  import { inscriptionEtapeAction, loginEmailAction, loginPasswordAction, loginAction } from '../actions/auth.actions';
+  DropdownItem,
+  Alert } from 'reactstrap';
+  import { inscriptionEtapeAction, removeAlert,  loginEmailAction, loginPasswordAction, loginAction, deconnexionActionDispatcher } from '../actions/auth.actions';
 import { connect } from 'react-redux';
 
 import { Link, NavLink } from 'react-router-dom'
@@ -40,6 +41,23 @@ class Login extends Component {
   handleTogle = () => {
     const newTheme = this.state.theme === 'dark' ? 'light' : 'dark';
     this.setState({theme: newTheme})
+  }
+
+  disconnect = () => {
+    //console.log('yaaaaa');
+    this.props.deconnexionActionDispatcher();
+  }
+
+  getAlert = () => {
+    if(this.props.data.alert_message != "") {
+     this.props.removeAlert();
+      return (
+       <Alert color="info">
+            {this.props.data.alert_message}
+        </Alert>
+        );
+    }
+    return;
   }
 
   getUserNav = () => {
@@ -74,7 +92,7 @@ class Login extends Component {
                 <NavLink to="/login">mon compte</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/register">deconnexion</NavLink>
+                <NavLink onClick={this.disconnect}  to="/">deconnexion</NavLink>
               </NavItem>
            </Nav>
 
@@ -87,6 +105,7 @@ class Login extends Component {
     console.log(this.props.data.etape);
     return (
       <div>
+      {this.getAlert()}
         <Navbar color="light" light expand="md">
           <NavbarBrand to="/"><NavLink to="/">Vente d'animer</NavLink></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
@@ -106,10 +125,11 @@ class Login extends Component {
 function mapStateToProps(state) {
   return {
     data: {
-      etape: state.authData.etape_auth,
+      etape:        state.authData.etape_auth,
+      alert_message: state.authData.alert_message,
     }
   };
 }
 
 
-export default connect(mapStateToProps , {})(Login);
+export default connect(mapStateToProps , {deconnexionActionDispatcher, removeAlert})(Login);
