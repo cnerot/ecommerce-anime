@@ -4,8 +4,18 @@ module.exports.controller = (model_path) => {
     adminCheck: async (req, res, next) => {
         const User = require('./user/user.model')
         User.findOne({ email : req.user.email}, function(err, result) {
-          if (result.role !== "Admin") {
+          if (result === null || result.role !== "Admin") {
             throw Error('Must Be Admin');
+          }
+        });
+        next();
+    },
+
+    userCheck: async (req, res, next) => {
+        const User = require('./user/user.model')
+        User.findOne({ email : req.user.email}, function(err, result) {
+          if (result === null) {
+            throw Error('Must Be Connected');
           }
         });
         next();
