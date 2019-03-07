@@ -8,12 +8,15 @@ import {
   INSCRIPTION_PASSWORD,
   INSCRIPTION_COPIE_PASSWORD,
   ALERT_MESSAGE,
-  REMOVE_ALERT
+  REMOVE_ALERT,
+  REDIRECT_OK,
+  TOKEN_OK
 } from '../actions/auth.actions';
 
 
 const defaultState = {
   etape_auth: 0,
+  token: "",
   inscriptionType: 0,
   email_login_form: "",
   password_login_form: "",
@@ -52,7 +55,8 @@ const authReducer = (state = defaultState, action) => {
     return {
       ...state,
       userID: action.payload.userId,
-      etape_auth: 1,
+      token:  action.payload.token,
+      etape_auth: 2,
     }
     break;
     case DECONNEXION_ACTION:
@@ -92,6 +96,18 @@ const authReducer = (state = defaultState, action) => {
     return {
         ...state,
           alert_message: "",
+    };  
+    break;
+    case REDIRECT_OK:
+    return {
+        ...state,
+          etape_auth: 1,
+    };  
+    break;
+    case TOKEN_OK:
+    return {
+        ...state,
+          etape_auth: 1,
     };  
     break;
     default:

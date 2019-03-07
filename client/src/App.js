@@ -6,6 +6,9 @@ import { BrowserRouter } from "react-router-dom";
 import Header from './containers/Header';
 import NavBar from './containers/NavBar';
 
+import { connect } from 'react-redux';
+import { tokenExistAction } from './actions/auth.actions';
+
 class App extends Component {
 
   constructor(props) {
@@ -13,8 +16,14 @@ class App extends Component {
 
   }
 
-  componentWillMount() {
-    
+  componentWillMount = () => {
+
+    if(typeof(this.props.token == undefined)){
+      var token = localStorage.getItem('token');
+      if(token != undefined) {
+        this.props.tokenExistAction(token);
+      }
+    }
   }
 
   render() {
@@ -26,4 +35,14 @@ class App extends Component {
   }
 }
 
-export default App;
+
+function mapStateToProps(state) {
+  return {
+    data: {
+      token: state.authData.token,
+    }
+  };
+}
+
+
+export default connect(mapStateToProps , {tokenExistAction})(App);

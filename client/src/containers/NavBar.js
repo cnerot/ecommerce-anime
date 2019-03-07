@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Redirect } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -12,7 +12,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Alert } from 'reactstrap';
-  import { inscriptionEtapeAction, removeAlert,  loginEmailAction, loginPasswordAction, loginAction, deconnexionActionDispatcher } from '../actions/auth.actions';
+  import { inscriptionEtapeAction, setRedirectOK, removeAlert,  loginEmailAction, loginPasswordAction, loginAction, deconnexionActionDispatcher } from '../actions/auth.actions';
 import { connect } from 'react-redux';
 
 import { Link, NavLink } from 'react-router-dom'
@@ -31,6 +31,8 @@ class Login extends Component {
       isOpen: false
     };
   }
+
+
 
  toggle() {
     this.setState({
@@ -97,12 +99,15 @@ class Login extends Component {
            </Nav>
 
         );
+    }else if(this.props.data.etape == 2) {
+      this.props.setRedirectOK();
+      return <Redirect to='/' />
     }
   }
 
   render() {
 
-    console.log(this.props.data.etape);
+
     return (
       <div>
       {this.getAlert()}
@@ -132,4 +137,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps , {deconnexionActionDispatcher, removeAlert})(Login);
+export default connect(mapStateToProps , {setRedirectOK,deconnexionActionDispatcher, removeAlert})(Login);

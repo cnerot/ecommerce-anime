@@ -1,6 +1,7 @@
 //import { dispatch } from 'react-redux';
 import {store} from "../index";
 import {qs} from 'qs';
+import history from '../history' 
 export  const INSCRIPTION_ETAPES = "changer_étapes";
 export  const LOGIN_EMAIL = "Texte_email";
 export  const LOGIN_PASSWORD = "text_password";
@@ -12,6 +13,8 @@ export const INSCRIPTION_COPIE_PASSWORD = "inscription password copie";
 export const INSCRIPTION = 'inscription';
 export const ALERT_MESSAGE  = "alert message";
 export const REMOVE_ALERT  = "retirer les alertes";
+export const REDIRECT_OK ='redirect'; 
+export const TOKEN_OK ='token ok'; 
 
 export const inscriptionEtapeAction = etape => ({
   type: INSCRIPTION_ETAPES,
@@ -78,6 +81,7 @@ export const inscriptionAction = (email, password) => {
     .then(json => {
       if(json.success == true){
         store.dispatch(setAlertMessage("vous ete bien inscrit"))
+        
       }else if(json.success == false)
         store.dispatch(setAlertMessage('Les informations fournies contiennent des erreurs'))
 
@@ -131,10 +135,11 @@ var details = {
     })
     .then(response => response.json())
     .then(json => {
-      console.log(json.success);
       if(json.success == true){
-        console.log('uaaaaaaaaaaaaaaa');
-        store.dispatch(loginActionDispatcher(1))
+
+        localStorage.setItem('token', json.token);
+        store.dispatch(loginActionDispatcher(1, json.token));
+        
       }else if(json.msg == "auth incorect"){
         store.dispatch(setAlertMessage('auth incorect'));
       }
@@ -142,13 +147,15 @@ var details = {
         store.dispatch(setAlertMessage('Authentication failed. User not found.'))
 
     }
-
-    )
-    .catch((e) => store.dispatch(setAlertMessage("Une erreur du serveur c'est produite. ")));
+    ).catch((e) => {console.log('La requete a generer une erreur.')});
   }
 }
+export const saveToken = (token) => {
+  console.log(token);
+}
 
-export const loginActionDispatcher = (data) => {
+export const loginActionDispatcher = (data, token) => {
+
   return {
     type: LOGIN_ACTION,
     payload: data
@@ -161,6 +168,7 @@ export const deconnexionActionDispatcher = (data) => {
     payload: data
   }
 }
+
 
 
 export const removeAlert = () => {
@@ -177,5 +185,20 @@ export const removeAlertDispatch = () => {
   return {
     type: REMOVE_ALERT,
     payload: true
+  }
+}
+
+
+export const setRedirectOK = () => {
+    return {
+    type: REDIRECT_OK,
+    payload: true
+  }
+}
+
+export const tokenExistAction = (token) => {
+  return {
+    type: TOKEN_OK,
+    payload: token
   }
 }
