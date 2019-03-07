@@ -18,6 +18,7 @@ function GetRoutes () {
 		    <Route path="/register" component={Register}/>
 		    <Route path="/components" component={Home}/>
 			<Route path="/listeAnime" component={ListeAnime}/>
+			<Route path="/Panier" component={Cart}/>
 
 		    
 		  </div>
