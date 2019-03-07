@@ -6,6 +6,7 @@ const defaultController = require('../controller');
 
 const router = express.Router();
 const {
+  adminCheck,
   check,
   create,
   remove,
@@ -17,7 +18,7 @@ const {
 
 router
   .route('/')
-  .get(catchErrors(list))
+  .get(catchErrors(adminCheck), catchErrors(list))
   .post(catchErrors(create));
 
 
