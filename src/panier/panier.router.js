@@ -6,35 +6,23 @@ const mongoose = require('mongoose');
 
 const router = express.Router();
 const {
+    adminCheck,
     check,
     create,
     remove,
     list,
     update,
-    view
-} = Object.assign({}, defaultController.controller('./panier/panier.model'));
-
+    view,
+    validate
+} = Object.assign({}, defaultController.controller('./panier/panier.model'), require('./panier.controller'));
 
 router
     .route('/valid/:id')
-    .post((req, res)=>{
-        const Panier = require('./panier.model');
-        var p = Panier.find({ _id : req.params.id}, function(err, result) {
-            console.log(result);
-            console.log(err);
-            res.send(result).catch(()=>{console.log("test")});
-    
-          });
-    
-    });
-
-
-
-
+    .post(validate);
 
 router
     .route('/')
-    .get(catchErrors(list))
+    .get(catchErrors(adminCheck), catchErrors(list))
     .post(catchErrors(create));
 
 router
