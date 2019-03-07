@@ -32,9 +32,18 @@
   }
 }
 
+.container {
+  background-color: #f2f2f2;
+  padding-bottom: 10px;
+}
 
 .navContainer {
   width: 50%;
   display: flex;
   justify-content: space-around;
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 40%;
 }

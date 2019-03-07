@@ -13,10 +13,14 @@ class App extends Component {
 
   }
 
+  componentWillMount() {
+    
+  }
+
   render() {
     return (
       <div>
-       home
+        
       </div>
     );
   }
