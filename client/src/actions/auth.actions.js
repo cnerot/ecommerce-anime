@@ -126,7 +126,7 @@ var details = {
   formBody = formBody.join("&");
 
   return dispatch => { 
-    fetch('http://0.0.0.0:3000/authenticate', {
+    fetch('http://R:3000/authenticate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'

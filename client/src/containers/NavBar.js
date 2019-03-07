@@ -91,7 +91,7 @@ class Login extends Component {
                 <NavLink to="/">Panier</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/login">mon compte</NavLink>
+                <NavLink to="/account">mon compte</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink onClick={this.disconnect}  to="/">deconnexion</NavLink>
