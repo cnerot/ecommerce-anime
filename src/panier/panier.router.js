@@ -7,10 +7,9 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const {
     adminCheck,
+    userCheck,
     check,
-    remove,
     list,
-    update,
     view,
     validate
 } = Object.assign({}, defaultController.controller('./panier/panier.model'), require('./panier.controller'));
@@ -21,13 +20,12 @@ router
 
 router
     .route('/')
-    .get(catchErrors(adminCheck), catchErrors(list))
+    .get(catchErrors(userCheck), catchErrors(view));
 
 router
-    .route('/:id')
-    .get(catchErrors(check), catchErrors(view))
-    .put(catchErrors(check), catchErrors(update))
-    .delete(catchErrors(check), catchErrors(remove));
+    .route('/all')
+    .get(catchErrors(adminCheck), catchErrors(list));
+
 
 
 module.exports = router;

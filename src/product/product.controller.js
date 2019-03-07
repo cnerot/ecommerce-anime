@@ -2,9 +2,7 @@ const Product = require('./product.model');
 
 module.exports.create = async (req, res) => {
 	const product = new Product(req.body);
-
-	//check name not null
-
+	
 	//check category exists
 
 	//check price > 0
@@ -30,15 +28,41 @@ module.exports.addToCart = async (req, res) => {
         }
         var add_product_to_cart = true;
         for (i = 0; i < panier.products.length; i++) { 
-			if (panier.products[i].id == product._id){
+        	
+        	if (escape(panier.products[i].product._id) == escape(product._id)){
 				add_product_to_cart = false;
 				panier.products[i].qty += 1;
 			}
 		}
         if (add_product_to_cart){
-        	panier.products.push({id:product, qty:1});
+        	panier.products.push({product:product, qty:1});
         }
   		panier.save();
   		res.json(panier);
+    });
+};
+
+
+module.exports.removeFromCart = async (req, res) => {
+  	const Panier = require('../panier/panier.model')
+  	Panier.findOne({ user: req.user._id, current: true}, function(err, result) {
+        if (result === null){
+          throw Error('Panier is empty');
+        } else {
+			var product_missing = true;
+	        for (i = 0; i < result.products.length; i++) {
+        		if (escape(result.products[i].product._id) == escape(req.params.id)){
+					result.products.splice(i, 1);
+					product_missing = false;
+				}
+			}
+			if (product_missing){
+				throw Error('Product is not in Panier');
+			} else {
+  				result.save();
+	  			res.json(result);
+			}
+        }
+        
     });
 };

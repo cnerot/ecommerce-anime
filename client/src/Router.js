@@ -8,11 +8,11 @@ import AddProduct from './containers/AddProduct';
 
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
+import history from './history';
 
 function GetRoutes () {
 	return(
-		<Router>
+		<Router history={history}>
 		  <div className="container_global"  >
 		  <NavBar />
 		    <Route exact path="/" component={Home}/>

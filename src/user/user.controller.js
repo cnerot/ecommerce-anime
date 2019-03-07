@@ -19,3 +19,16 @@ module.exports.create = async (req, res) => {
   	});
 
 };
+
+module.exports.currentUser = async (req, res) => {
+	console.log(req.user.id);
+
+ 	User.findOne({ email : req.user.email}, function(err, result) {
+        if(result == null){
+			throw Error("Not connected")
+		} else {
+			delete result.password;
+			res.json(result);
+		}
+    });
+};

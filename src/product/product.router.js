@@ -11,12 +11,16 @@ const {
     list,
     update,
     view,
-    addToCart
+    addToCart,
+    removeFromCart
 } = Object.assign({}, defaultController.controller('./product/product.model'), require('./product.controller'));
 
 router
     .route('/addToCart/:id')
     .post(catchErrors(check), catchErrors(addToCart));
+router
+    .route('/removeFromCart/:id')
+    .post(catchErrors(removeFromCart));
 
 router
     .route('/')

@@ -37,9 +37,6 @@ const Router = {
     }
 };
 
-
-
-
 //prepare cross origin security options
 var whitelist = ['http://localhost:3001']
 var corsOptions = {
@@ -68,8 +65,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 const jwtMW = exjwt({
-    secret: 'lolmdr',
-    credentialsRequired :false,
+    secret: 'lolmdr'
 });
 
 

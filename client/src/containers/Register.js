@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import NavBar from './NavBar';
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 // redux
-import { inscriptionEtapeAction, loginEmailAction, loginPasswordAction, loginAction } from '../actions/auth.actions';
+import { inscriptionEtapeAction,inscriptionEmailAction, inscriptionAction, inscriptionPasswordAction, inscriptionCopiePasswordAction } from '../actions/auth.actions';
 import { connect } from 'react-redux';
 
 
@@ -23,20 +23,29 @@ class Register extends Component {
   }
 
   handleEmailChange = (e) => {
-    this.props.loginEmailAction(e.target.value);
+    this.props.inscriptionEmailAction(e.target.value);
   }
 
   handlePasswordChange = (e) => {
-    this.props.loginPasswordAction(e.target.value);
+    this.props.inscriptionPasswordAction(e.target.value);
+  }
+
+  handlePasswordCopieChange = (e) => {
+    this.props.inscriptionCopiePasswordAction(e.target.value);
   }
 
   formSubmit = (e) => {
+    if(this.props.data.password !== this.props.data.copiePassword) {
+      //this.setState({})
+      return;
+    }
     e.preventDefault();
-    this.props.loginAction(this.props.data.email, this.props.data.password);
+    this.props.inscriptionAction(this.props.data.email, this.props.data.password);
   }
 
 
   render() {
+    console.log(this.props.data);
     return (
       <div className="App container mt-5 pt-5">
         <h4>Inscription</h4>  
@@ -56,7 +65,7 @@ class Register extends Component {
               <FormGroup row>
                 <Label for="examplePassword" sm={2}>Repeat password</Label>
                 <Col sm={10}>
-                  <Input onChange={this.handlePasswordChange}  value={this.props.data.password} type="password" name="password" id="examplePassword" placeholder="password placeholder" />
+                  <Input onChange={this.handlePasswordCopieChange}  value={this.props.data.copiePassword} type="password" name="password" id="examplePassword" placeholder="password placeholder" />
                 </Col>
               </FormGroup>
               <Button onClick={this.formSubmit}> Valider le formulaire </Button>
@@ -69,11 +78,12 @@ class Register extends Component {
 function mapStateToProps(state) {
   return {
     data: {
-      email: state.authData.email_login_form,
-      password: state.authData.password_login_form,
+      email: state.authData.email_inscription_form,
+      password: state.authData.password_inscription_form,
+      copiePassword: state.authData.passwordCopie_inscription_form,
     }
   };
 }
 
 
-export default connect(mapStateToProps , {})(Register);
+export default connect(mapStateToProps , {inscriptionEmailAction, inscriptionAction, inscriptionPasswordAction, inscriptionCopiePasswordAction})(Register);
