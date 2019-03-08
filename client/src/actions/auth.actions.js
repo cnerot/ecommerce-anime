@@ -35,9 +35,6 @@ export const loginPasswordAction = (text) => ({
 });
 
 
-
-
-
 export const inscriptionEmailAction = (text) => ({
   type: INSCRIPTION_EMAIL,
   payload: text
@@ -138,9 +135,9 @@ var details = {
     .then(response => response.json())
     .then(json => {
       if(json.success == true){
-
         localStorage.setItem('token', json.token);
-        store.dispatch(loginActionDispatcher(1, json.token));
+        console.log(json.token);
+        store.dispatch(loginActionDispatcher(json.token));
         
       }else if(json.msg == "auth incorect"){
         store.dispatch(setAlertMessage('auth incorect'));
@@ -156,11 +153,11 @@ export const saveToken = (token) => {
   console.log(token);
 }
 
-export const loginActionDispatcher = (data, token) => {
+export const loginActionDispatcher = (token) => {
 
   return {
     type: LOGIN_ACTION,
-    payload: data
+    payload: token
   }
 }
 

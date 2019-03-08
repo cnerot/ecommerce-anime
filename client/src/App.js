@@ -18,15 +18,19 @@ class App extends Component {
 
   componentWillMount = () => {
 
+    console.log(this.props.data);
     if(typeof(this.props.token == undefined)){
       var token = localStorage.getItem('token');
+      console.log(token);
       if(token != undefined) {
+        console.log('lalalala');
         this.props.tokenExistAction(token);
       }
     }
   }
 
   render() {
+    console.log(this.props.data);
     return (
       <div>
         

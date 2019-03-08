@@ -51,11 +51,9 @@ const authReducer = (state = defaultState, action) => {
     };
     break;
     case LOGIN_ACTION:
-
     return {
       ...state,
-      userID: action.payload.userId,
-      token:  action.payload.token,
+      token:  action.payload,
       etape_auth: 2,
     }
     break;
@@ -68,7 +66,6 @@ const authReducer = (state = defaultState, action) => {
     }
     break;
     case INSCRIPTION_EMAIL:
-    console.log('yoyo');
     return {
         ...state,
           email_inscription_form: action.payload,
@@ -109,6 +106,7 @@ const authReducer = (state = defaultState, action) => {
     return {
         ...state,
           etape_auth: 1,
+          token: action.payload,
     };  
     break;
     default:
