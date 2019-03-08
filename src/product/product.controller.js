@@ -29,12 +29,13 @@ module.exports.addToCart = async (req, res) => {
         var add_product_to_cart = true;
         for (i = 0; i < panier.products.length; i++) { 
         	
-        	if (escape(panier.products[i].product._id) == escape(product._id)){
+        if (escape(panier.products[i].product._id) == escape(product._id)){
 				add_product_to_cart = false;
 				panier.products[i].qty += 1;
 			}
 		}
         if (add_product_to_cart){
+
         	panier.products.push({product:product, qty:1});
         }
   		panier.save();

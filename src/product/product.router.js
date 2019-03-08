@@ -5,6 +5,7 @@ const defaultController = require('../controller');
 const router = express.Router();
 const {
     adminCheck,
+    userCheck,
     check,
     create,
     remove,
@@ -17,7 +18,7 @@ const {
 
 router
     .route('/addToCart/:id')
-    .post(catchErrors(check), catchErrors(addToCart));
+    .post(catchErrors(userCheck), catchErrors(check), catchErrors(addToCart));
 router
     .route('/removeFromCart/:id')
     .post(catchErrors(removeFromCart));
