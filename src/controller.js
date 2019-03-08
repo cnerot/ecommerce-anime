@@ -15,9 +15,9 @@ module.exports.controller = (model_path) => {
     },
     userCheck: async (req, res, next) => {
         const User = require('./user/user.model')
-          if (req.user === undefined) {
-            throw Error('Must Be Connected');
-          }
+        if (req.user === undefined) {
+          throw Error('Must Be Connected');
+        }
         next();
     },
     check: async (req, res, next) => {
