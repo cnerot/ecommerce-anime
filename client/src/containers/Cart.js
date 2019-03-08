@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 // route
-import { BrowserRouter } from "react-router-dom";
+//import { BrowserRouter as Router } from "react-router-dom";
 
 // element
-import Header from './Header';
-import NavBar from './NavBar';
+//import Header from './Header';
+//import NavBar from './NavBar';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Spinner } from 'reactstrap';
 import { API_URL } from '../config'
 
-class ListeAnime extends Component {
+class Cart extends Component {
 
   constructor(props) {
     super(props);
-  this.state = {
-      spiner: true,
-      items: [],
+    this.state = {
+        spiner: true,
+        items: {},
     }
   }
 
@@ -31,12 +31,8 @@ class ListeAnime extends Component {
         'Host': API_URL
       }
     })
-    .then(items =>{ 
-      if (items === null){
-        items = [];
-      }
-      console.log(items);
-      this.setState({ items : items })});
+    .then(response => response.json())
+    .then(items => {this.setState({ items: items }); console.log(items)});
 
   }
 
@@ -50,14 +46,15 @@ class ListeAnime extends Component {
 
   render() {
     const { items } = this.state;
-    console.log(this.state.items);
+    console.log(items);
+    //console.log('tortototo'+ items);
     return (
 
       <div className="App container mt-5 pt-5">
 
 <div class="container">
 <div class="row">
-      {this.state.items.map( item=>
+      {items.products && items.products.map( item=>
  <div class="col-sm-4">       
   <Card  key={item.product.name}>
     <CardImg top width="100%" src="https://www.nautiljon.com/images/perso/00/17/vegeta_1771.jpg?1525613735" alt="Card image cap" />
@@ -80,4 +77,4 @@ class ListeAnime extends Component {
   }
 }
 
-export default ListeAnime;
+export default Cart;

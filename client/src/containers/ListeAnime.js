@@ -35,14 +35,8 @@ class ListeAnime extends Component {
   valider(arg){
 
 
-    fetch(API_URL + '/api/product/addToCart/'+arg, {
+    fetch(API_URL + '/api/product/addToCart/${arg}', {
       method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
-        'Host': API_URL
-      }
     }).then(function(response) {
       console.log(response);
       return response.json();
@@ -59,7 +53,7 @@ class ListeAnime extends Component {
 
 <div class="container">
 <div class="row">
-      {this.state.items.map( item=>
+      {items.map( item=>
  <div class="col-sm-4">       
   <Card  key={item.name}>
     <CardImg top width="100%" src="https://www.nautiljon.com/images/perso/00/17/vegeta_1771.jpg?1525613735" alt="Card image cap" />
