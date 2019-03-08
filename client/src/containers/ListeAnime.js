@@ -37,6 +37,12 @@ class ListeAnime extends Component {
 
     fetch(API_URL + '/api/product/addToCart/'+arg, {
       method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        'Host': API_URL
+      }
     }).then(function(response) {
       console.log(response);
       return response.json();

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // route
 import { BrowserRouter, Redirect } from "react-router-dom";
-
 // element
 import Header from './Header';
 import NavBar from './NavBar';
@@ -28,6 +27,7 @@ class AddProduct extends Component {
 
   componentWillMount() {
 
+    
     //    fetch(`http://0.0.0.0:3000/api/product`)
     //  .then(result=>result.json())
     //.then(items => this.setState({ items : items }));
@@ -58,9 +58,8 @@ class AddProduct extends Component {
       }
     }).then(function(response) {
       console.log(response); 
-      return <Redirect to='/listeAnime' />
- 
-
+     
+      BrowserRouter.push('/listeAnime');
     });
 
    
@@ -112,7 +111,7 @@ class AddProduct extends Component {
             <FormGroup row>
             <Label sm={2}>prix</Label>
             <Col sm={4}>
-              <Input type="number" onChange={this.handlerChangePrix.bind(this)} value={this.state.prix} name="prixs" placeholder="euro" />
+              <Input type="number" onChange={this.handlerChangePrix.bind(this)} value={this.state.prix} name="prixs" placeholder="euro" required/>
             </Col>
           </FormGroup>
           <Button onClick={this.handleSubmit.bind(this)}  > Valider </Button>
