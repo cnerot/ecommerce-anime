@@ -43,6 +43,7 @@ class AddProduct extends Component {
         name: this.state.name,
         description: this.state.description,
         price: this.state.prix,
+        urlImage: this.state.urlImage,
       };
 
 
@@ -90,6 +91,12 @@ class AddProduct extends Component {
 
   }
 
+  handlerChangeurlImage(event){
+    event.preventDefault();
+
+    this.setState({urlImage : event.target.value})
+
+  }
 
   render() {
     return (
@@ -112,6 +119,12 @@ class AddProduct extends Component {
             <Label sm={2}>prix</Label>
             <Col sm={4}>
               <Input type="number" onChange={this.handlerChangePrix.bind(this)} value={this.state.prix} name="prixs" placeholder="euro" required/>
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label sm={2}>Image Url</Label>
+            <Col sm={4}>
+              <Input type="text" onChange={this.handlerChangeurlImage.bind(this)} value={this.state.urlImage} name="prixs" placeholder="image url" required/>
             </Col>
           </FormGroup>
           <Button onClick={this.handleSubmit.bind(this)}  > Valider </Button>
