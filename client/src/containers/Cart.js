@@ -12,10 +12,7 @@ class Cart extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      spiner: true,
-      items: [],
-    }
+    this.state = {}
   }
 
   componentWillMount() {}

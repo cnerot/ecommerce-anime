@@ -45,7 +45,6 @@ class Register extends Component {
 
 
   render() {
-    console.log(this.props.data);
     return (
       <div className="App container mt-5 pt-5">
         <h4>Inscription</h4>  
