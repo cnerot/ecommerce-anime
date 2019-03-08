@@ -136,7 +136,6 @@ var details = {
     .then(json => {
       if(json.success == true){
         localStorage.setItem('token', json.token);
-        console.log(json.token);
         store.dispatch(loginActionDispatcher(json.token));
         
       }else if(json.msg == "auth incorect"){

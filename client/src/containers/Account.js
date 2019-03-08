@@ -17,7 +17,7 @@ class Account extends Component {
   render() {
     return (
       <div className="App container mt-5 pt-5">
-        
+        <h1>Nicolas</h1>  
       </div>
     );
   }
@@ -25,7 +25,7 @@ class Account extends Component {
 
 function mapStateToProps(state) {
   return {
-    data: {=
+    data: {
       email: state.authData.email_login_form,
       password: state.authData.password_login_form,
     }

@@ -31,7 +31,8 @@ class ListeAnime extends Component {
         'Host': API_URL
       }
     })
-    .then(items =>{ 
+    .then(items => { 
+    	console.log(items)
       if (items === null){
         items = [];
       }
@@ -57,7 +58,7 @@ class ListeAnime extends Component {
 
 <div class="container">
 <div class="row">
-      {this.state.items.map( item=>
+      {this.state.items.map(item=>
  <div class="col-sm-4">       
   <Card  key={item.product.name}>
     <CardImg top width="100%" src="https://www.nautiljon.com/images/perso/00/17/vegeta_1771.jpg?1525613735" alt="Card image cap" />

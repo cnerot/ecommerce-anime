@@ -12,9 +12,8 @@ import {
   DropdownMenu,
   DropdownItem,
   Alert } from 'reactstrap';
-  import { inscriptionEtapeAction, setRedirectOK, removeAlert,  loginEmailAction, loginPasswordAction, loginAction, deconnexionActionDispatcher } from '../actions/auth.actions';
+import { inscriptionEtapeAction,tokenExistAction, setRedirectOK, removeAlert,  loginEmailAction, loginPasswordAction, loginAction, deconnexionActionDispatcher } from '../actions/auth.actions';
 import { connect } from 'react-redux';
-
 import { Link, NavLink } from 'react-router-dom'
 
 class Login extends Component {
@@ -33,6 +32,16 @@ class Login extends Component {
     };
   }
 
+  componentWillMount = () => {
+
+    if(typeof(this.props.token == undefined)){
+      var token = localStorage.getItem('token');
+      if(token != undefined) {
+        console.log('lalalala');
+        this.props.tokenExistAction(token);
+      }
+    }
+  }
 
 
  toggle() {
@@ -137,9 +146,10 @@ function mapStateToProps(state) {
     data: {
       etape:        state.authData.etape_auth,
       alert_message: state.authData.alert_message,
+      token: state.authData.token,
+
     }
   };
 }
 
-
-export default connect(mapStateToProps , {setRedirectOK,deconnexionActionDispatcher, removeAlert})(Login);
+export default connect(mapStateToProps , {tokenExistAction,setRedirectOK,deconnexionActionDispatcher, removeAlert})(Login);

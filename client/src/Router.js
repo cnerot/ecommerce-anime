@@ -6,6 +6,7 @@ import NavBar from './containers/NavBar';
 import ListeAnime from './containers/ListeAnime';
 import AddProduct from './containers/AddProduct';
 import Cart from './containers/Cart';
+import Account from './containers/Account';
 
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -23,6 +24,7 @@ function GetRoutes () {
 			<Route path="/listeAnime" component={ListeAnime}/>
 			<Route path="/addProduct" component={AddProduct}/>
 			<Route path="/Panier" component={Cart}/>
+			<Route path="/account" component={Account}/>
 
 		    
 		  </div>
