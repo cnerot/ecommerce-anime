@@ -3,12 +3,12 @@ const Product = require('./product.model');
 module.exports.create = async (req, res) => {
 	const product = new Product(req.body);
 	
-	//check category exists
+  if (req.body.quantity == undefined){
+    product.quantity = 10;
+  }
 
-	//check price > 0
-
-  	await product.save();
-  	res.json(product);
+  await product.save();
+  res.json(product);
 
 };
 
@@ -30,13 +30,30 @@ module.exports.addToCart = async (req, res) => {
         for (i = 0; i < panier.products.length; i++) { 
         	
         if (escape(panier.products[i].product._id) == escape(product._id)){
-				add_product_to_cart = false;
-				panier.products[i].qty += 1;
-			}
+				  add_product_to_cart = false;
+          if (product.quantity >= 1){
+	   			  panier.products[i].qty += 1;
+            product.quantity-=1;
+            product.save();
+          } else {
+            res.status(500).send({
+              "success": false,
+              "message": "No Stock left products"
+            });
+          }
+  			}
 		}
-        if (add_product_to_cart){
-
-        	panier.products.push({product:product, qty:1});
+    if (add_product_to_cart){
+          if (product.quantity >= 1){
+            panier.products.push({product:product, qty:1});
+            product.quantity-=1;
+            product.save();
+          } else {
+            res.status(500).send({
+    "success": false,
+    "message": "no products"
+});
+          }
         }
   		panier.save();
   		res.json(panier);
