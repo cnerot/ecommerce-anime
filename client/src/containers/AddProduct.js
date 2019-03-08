@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // route
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Redirect } from "react-router-dom";
 
 // element
 import Header from './Header';
@@ -8,6 +8,7 @@ import NavBar from './NavBar';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Form, FormGroup, Label,Col,
     Input, FormText  } from 'reactstrap';
+import { API_URL } from '../config';
 
 class AddProduct extends Component {
 
@@ -16,6 +17,7 @@ class AddProduct extends Component {
     super(props);
 
     this.state = {
+      redirect: true,
       spiner: true,
       items: [],
       name : this.props.name,
@@ -23,7 +25,6 @@ class AddProduct extends Component {
       prix : this.props.prix,
     }
   }
-
 
   componentWillMount() {
 
@@ -46,14 +47,23 @@ class AddProduct extends Component {
 
 
       console.log(JSON.stringify(data));
-    fetch(`http://0.0.0.0:3000/api/product/`, {
+    fetch(API_URL+'/api/product/', {
       method: 'post',
       body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        'Host': API_URL
+      }
     }).then(function(response) {
-      console.log(response);
-      return response.json();
+      console.log(response); 
+      return <Redirect to='/listeAnime' />
+ 
+
     });
 
+   
   
   }
 

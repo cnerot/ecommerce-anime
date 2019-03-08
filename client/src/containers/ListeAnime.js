@@ -12,19 +12,15 @@ import { API_URL } from '../config'
 class ListeAnime extends Component {
 
   constructor(props) {
-
     super(props);
-
   this.state = {
       spiner: true,
       items: [],
     }
-
   }
 
   componentWillMount() {
-
-    fetch(API_URL +'/api/product')
+    fetch(API_URL+'/api/product')
     .then(result=>result.json())
     .then(items => this.setState({ items : items }));
   }
@@ -36,7 +32,7 @@ class ListeAnime extends Component {
   }
 
 
-  validertoto(arg){
+  valider(arg){
 
 
     fetch(API_URL + '/api/product/addToCart/${arg}', {
@@ -63,9 +59,9 @@ class ListeAnime extends Component {
     <CardImg top width="100%" src="https://www.nautiljon.com/images/perso/00/17/vegeta_1771.jpg?1525613735" alt="Card image cap" />
       <CardBody>
         <CardTitle>{item.name || "no name"}</CardTitle>
-        <CardSubtitle>{item.price || "no stoke"}</CardSubtitle>
-        <CardText>{item.description || "no stoke"}</CardText>
-        <Button onClick={() => this.validertoto(item._id )} >ajouter au pannier</Button>
+        <CardSubtitle>{item.description || "no stoke"}</CardSubtitle>
+        <CardText>{item.price || "no stoke"}</CardText>
+        <Button onClick={() => this.valider(item._id )} >ajouter au pannier</Button>
       </CardBody>
     </Card>
     </div>
