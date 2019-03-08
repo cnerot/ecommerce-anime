@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // route
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Redirect } from "react-router-dom";
 
 // element
 import Header from './Header';
@@ -16,6 +16,7 @@ class ListeAnime extends Component {
   this.state = {
       spiner: true,
       items: [],
+      redirect : false
     }
   }
 
@@ -32,6 +33,8 @@ class ListeAnime extends Component {
   }
 
 
+
+
   valider(arg){
 
 
@@ -43,16 +46,17 @@ class ListeAnime extends Component {
         'Authorization': 'Bearer ' + localStorage.getItem('token'),
         'Host': API_URL
       }
-    }).then(function(response) {
-      console.log(response);
-      return response.json();
-    });
-
-
+    }).then(result=>result.json())
+    .then(() => this.setState({ redirect: true }));
+   
   }
 
   render() {
     const { items } = this.state;
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to='/panier'/>;
+    }
     return (
 
       <div className="App container mt-5 pt-5">
@@ -62,19 +66,20 @@ class ListeAnime extends Component {
       {items.map( item=>
  <div class="col-sm-4">       
   <Card  key={item.name}>
-    <CardImg top width="100%" src={item.urlImage || "testt"} alt="Card image cap" />
+    <CardImg top width="100%" src={item.urlImage || "https://i.redd.it/q7szpfctitj01.jpg"} alt="Card image cap" />
       <CardBody>
         <CardTitle>{item.name || "no name"}</CardTitle>
-        <CardSubtitle>{item.description || "no stoke"}</CardSubtitle>
-        <CardText>{item.price || "no stoke"}</CardText>
-        <Button onClick={() => this.valider(item._id )} >ajouter au pannier</Button>
+        <CardSubtitle>{item.description || "no description"}</CardSubtitle>
+      <CardText>Price {item.price || "10.00"}$</CardText>
+      <CardText>Stock: {item.quantity || "0"}</CardText>
+        <Button onClick={() => this.valider(item._id )}>ajouter au pannier</Button>
       </CardBody>
     </Card>
     </div>
         )}
 </div>
 </div>
-<Button onClick={() => this.valider()}> Acheter </Button>
+
 </div>
      // <div>
        // {this.getSpinner()}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // route
-//import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter, Redirect } from "react-router-dom";
 
 // element
 //import Header from './Header';
@@ -16,6 +16,7 @@ class Cart extends Component {
     this.state = {
         spiner: true,
         items: {},
+        redirect: false
     }
   }
 
@@ -43,26 +44,42 @@ class Cart extends Component {
   }
 
 
+  buy(){
+      fetch(API_URL+'/api/panier/validate', {
+          method: 'post',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + localStorage.getItem('token'),
+              'Host': API_URL
+          }
+      })
+      .then(() => this.setState({ redirect: true }));
+
+  }
 
   render() {
     const { items } = this.state;
-    console.log(items);
-    //console.log('tortototo'+ items);
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to='/listeAnime'/>;
+    }
     return (
 
       <div className="App container mt-5 pt-5">
 
 <div class="container">
+<Button onClick={() => this.buy()}> Acheter </Button>
 <div class="row">
       {items.products && items.products.map( item=>
  <div class="col-sm-4">       
   <Card  key={item.product.name}>
-    <CardImg top width="100%" src={item.product.urlImage || "testt"} alt="Card image cap" />
+    <CardImg top width="100%" src={item.product.urlImage || "https://i.redd.it/q7szpfctitj01.jpg"} alt="Card image cap" />
       <CardBody>
         <CardTitle>{item.product.name || "no name"}</CardTitle>
         <CardSubtitle>{item.product.description || "no stoke"}</CardSubtitle>
-        <CardText>{item.price || "no stoke"}</CardText>
-        <Button >ajouter au pannier</Button>
+        <CardText>Price: {item.product.price || "10.00"}$ </CardText>
+        <CardText>Quantité: {item.qty} </CardText>
       </CardBody>
     </Card>
     </div>

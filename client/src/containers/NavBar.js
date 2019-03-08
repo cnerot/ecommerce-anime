@@ -106,7 +106,7 @@ class Login extends Component {
         );
     }else if(this.props.data.etape == 2) {
       this.props.setRedirectOK();
-      return <Redirect to='/' />
+      return <Redirect to='/listeAnime' />
     }
   }
 

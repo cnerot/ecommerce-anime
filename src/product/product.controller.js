@@ -27,7 +27,8 @@ module.exports.addToCart = async (req, res) => {
             panier = result;
         }
         var add_product_to_cart = true;
-        for (i = 0; i < panier.products.length; i++) { 
+        var send_res = true;
+        for (i = 0; i < panier.products.length; i++) {
         	
         if (escape(panier.products[i].product._id) == escape(product._id)){
 				  add_product_to_cart = false;
@@ -36,6 +37,7 @@ module.exports.addToCart = async (req, res) => {
             product.quantity-=1;
             product.save();
           } else {
+              send_res = false;
             res.status(500).send({
               "success": false,
               "message": "No Stock left products"
@@ -49,14 +51,19 @@ module.exports.addToCart = async (req, res) => {
             product.quantity-=1;
             product.save();
           } else {
-            res.status(500).send({
-    "success": false,
-    "message": "no products"
-});
+              send_res = false;
+
+              res.status(500).send({
+                "success": false,
+                "message": "no products"
+            });
           }
         }
   		panier.save();
-  		res.json(panier);
+        if (send_res){
+            res.json(panier);
+
+        }
     });
 };
 
