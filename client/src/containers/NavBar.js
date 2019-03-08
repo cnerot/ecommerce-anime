@@ -101,6 +101,9 @@ class Login extends Component {
               <NavItem>
                 <NavLink to="/addProduct">ajouter un produit</NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink to="/adminProduct">Supprimer des produit</NavLink>
+              </NavItem>
            </Nav>
 
         );
