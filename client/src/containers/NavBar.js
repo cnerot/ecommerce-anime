@@ -90,7 +90,7 @@ class Login extends Component {
                 <NavLink to="/listeAnime/">liste des animé</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/">Panier</NavLink>
+                <NavLink to="/Panier">Panier</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink to="/account">mon compte</NavLink>
