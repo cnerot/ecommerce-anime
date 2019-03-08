@@ -2,6 +2,8 @@
 import {store} from "../index";
 import {qs} from 'qs';
 import history from '../history' 
+import { API_URL } from '../config'
+
 export  const INSCRIPTION_ETAPES = "changer_étapes";
 export  const LOGIN_EMAIL = "Texte_email";
 export  const LOGIN_PASSWORD = "text_password";
@@ -70,7 +72,7 @@ export const inscriptionAction = (email, password) => {
   formBody = formBody.join("&");
 
   return dispatch => { 
-    fetch('http://0.0.0.0:3000/register', {
+    fetch(API_URL + '/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -126,7 +128,7 @@ var details = {
   formBody = formBody.join("&");
 
   return dispatch => { 
-    fetch('http://R:3000/authenticate', {
+    fetch(API_URL+'/authenticate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'

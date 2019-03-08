@@ -1,9 +1,32 @@
 const Panier = require('./panier.model');
 
-
-module.exports.	create =  async (req, res) => {
-	console.log("ok");
-	const panier = new Panier(Object.assign({current:true}, req.body));
-  	await panier.save();
-  	res.json(panier);
+module.exports.validate = (req, res)=>{
+    const panier = Panier.findOne({ _id : req.params.id, current: true},function(err, result) {
+    	if(result != null){
+    		result.current = false;
+   			result.save();
+    		res.json(result);
+    	} else {
+          throw Error('Panier not found');
+    	}
+   	})
 };
+
+
+module.exports.view = async (req, res) => {
+  	Panier.findOne({ user: req.user._id, current: true}, function(err, result) {
+		var panier;
+		if (result == null){
+			panier = new Panier({
+     			user:req.user.id,
+       			current: true
+           	});
+		}else {
+			panier = result;
+		}
+		panier.save();
+		res.json(panier);
+	});
+};
+
+

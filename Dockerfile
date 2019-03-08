@@ -8,7 +8,7 @@ VOLUME [ "/usr/src/app" ]
 
 RUN npm install -g nodemon
 COPY package.json .
-RUN npm install --no-bin-links
+#RUN npm install --no-bin-links
 ENV NODE_ENV=development
 ENV DATABASE=mongodb://mongodb:27017/playground
 ENV PORT=3000

@@ -4,24 +4,34 @@ const defaultController = require('../controller');
 
 const router = express.Router();
 const {
+    adminCheck,
     check,
     create,
     remove,
     list,
     update,
-    view
-} = Object.assign({}, defaultController.controller('./product/product.model'));
+    view,
+    addToCart,
+    removeFromCart
+} = Object.assign({}, defaultController.controller('./product/product.model'), require('./product.controller'));
+
+router
+    .route('/addToCart/:id')
+    .post(catchErrors(check), catchErrors(addToCart));
+router
+    .route('/removeFromCart/:id')
+    .post(catchErrors(removeFromCart));
 
 router
     .route('/')
     .get(catchErrors(list))
-    .post(catchErrors(create));
+    .post(catchErrors(adminCheck), catchErrors(create));
 
 router
     .route('/:id')
     .get(catchErrors(check), catchErrors(view))
-    .put(catchErrors(check), catchErrors(update))
-    .delete(catchErrors(check), catchErrors(remove));
+    .put(catchErrors(adminCheck), catchErrors(check), catchErrors(update))
+    .delete(catchErrors(adminCheck), catchErrors(check), catchErrors(remove));
 
 
 module.exports = router;

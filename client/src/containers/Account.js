@@ -6,7 +6,6 @@ import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap
 import { inscriptionEtapeAction, loginEmailAction, loginPasswordAction, loginAction } from '../actions/auth.actions';
 import { connect } from 'react-redux';
 
-
 class Account extends Component {
 
   constructor(props) {

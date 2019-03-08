@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 
 const PanierSchema = new mongoose.Schema({
     user: {type : String},
-    products: [{type: String}],
-    current: {type: Boolean}
+    products: [{product: Object, qty: Number}],
+    current: {type: Boolean, required: true}
 });
 
 
