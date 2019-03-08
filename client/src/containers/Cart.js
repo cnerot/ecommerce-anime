@@ -18,8 +18,8 @@ class Cart extends Component {
   componentWillMount() {}
 
   render() {
-    return ();
+    return "";
   }
 }
 
-export default ListeAnime;
+export default Cart;

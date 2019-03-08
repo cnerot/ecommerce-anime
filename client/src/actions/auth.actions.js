@@ -2,6 +2,8 @@
 import {store} from "../index";
 import {qs} from 'qs';
 import history from '../history' 
+import { API_URL } from '../config'
+
 export  const INSCRIPTION_ETAPES = "changer_étapes";
 export  const LOGIN_EMAIL = "Texte_email";
 export  const LOGIN_PASSWORD = "text_password";
@@ -15,7 +17,6 @@ export const ALERT_MESSAGE  = "alert message";
 export const REMOVE_ALERT  = "retirer les alertes";
 export const REDIRECT_OK ='redirect'; 
 export const TOKEN_OK ='token ok'; 
-import { API_URL } from '../config'
 
 export const inscriptionEtapeAction = etape => ({
   type: INSCRIPTION_ETAPES,

@@ -4,6 +4,7 @@ import Login from './containers/Login';
 import Register from './containers/Register';
 import NavBar from './containers/NavBar';
 import ListeAnime from './containers/ListeAnime';
+import Cart from './containers/Cart';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import history from './history';
