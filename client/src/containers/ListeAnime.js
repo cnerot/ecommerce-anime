@@ -35,7 +35,7 @@ class ListeAnime extends Component {
   valider(arg){
 
 
-    fetch(API_URL + '/api/product/addToCart/${arg}', {
+    fetch(API_URL + '/api/product/addToCart/'+arg, {
       method: 'post',
     }).then(function(response) {
       console.log(response);
