@@ -7,6 +7,7 @@ import Header from './Header';
 import NavBar from './NavBar';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Spinner } from 'reactstrap';
+import { API_URL } from '../config'
 
 class ListeAnime extends Component {
 
@@ -23,7 +24,7 @@ class ListeAnime extends Component {
 
   componentWillMount() {
 
-    fetch(`http://0.0.0.0:3000/api/product`)
+    fetch(API_URL+'/api/product')
     .then(result=>result.json())
     .then(items => this.setState({ items : items }));
   }
