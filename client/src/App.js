@@ -16,16 +16,6 @@ class App extends Component {
 
   }
 
-  componentWillMount = () => {
-
-    if(typeof(this.props.token == undefined)){
-      var token = localStorage.getItem('token');
-      if(token != undefined) {
-        console.log('lalalala');
-        this.props.tokenExistAction(token);
-      }
-    }
-  }
 
   render() {
     console.log(this.props.data);

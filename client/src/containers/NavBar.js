@@ -129,10 +129,8 @@ class Login extends Component {
           <NavbarBrand to="/"><NavLink to="/">Vente d'animer</NavLink></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-           
-
+          
               {this.getUserNav()}
-             
            
           </Collapse>
         </Navbar>
