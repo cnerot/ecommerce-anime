@@ -24,7 +24,7 @@ class ListeAnime extends Component {
 
   componentWillMount() {
 
-    fetch(API_URL+'/api/product')
+    fetch(API_URL +'/api/product')
     .then(result=>result.json())
     .then(items => this.setState({ items : items }));
   }
@@ -39,7 +39,7 @@ class ListeAnime extends Component {
   validertoto(arg){
 
 
-    fetch(`http://0.0.0.0:3000/api/product/addToCart/${arg}`, {
+    fetch(API_URL + '/api/product/addToCart/${arg}', {
       method: 'post',
     }).then(function(response) {
       console.log(response);
