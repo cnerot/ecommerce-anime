@@ -80,9 +80,6 @@ class Login extends Component {
               <NavItem>
                 <NavLink to="/register">Inscription</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink to="/addProduct">ajouter un produit</NavLink>
-              </NavItem>
            </Nav>
        
         );
@@ -100,6 +97,9 @@ class Login extends Component {
               </NavItem>
               <NavItem>
                 <NavLink onClick={this.disconnect}  to="/">deconnexion</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="/addProduct">ajouter un produit</NavLink>
               </NavItem>
            </Nav>
 

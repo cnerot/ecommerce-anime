@@ -65,7 +65,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 const jwtMW = exjwt({
-    secret: 'lolmdr'
+    secret: 'lolmdr',
+    credentialsRequired: false,
 });
 
 
