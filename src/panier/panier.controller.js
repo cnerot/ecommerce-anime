@@ -1,7 +1,7 @@
 const Panier = require('./panier.model');
 
 module.exports.validate = (req, res)=>{
-    const panier = Panier.findOne({ _id : req.params.id, current: true},function(err, result) {
+    const panier = Panier.findOne({ user : req.user._id, current: true},function(err, result) {
     	if(result != null){
     		result.current = false;
    			result.save();

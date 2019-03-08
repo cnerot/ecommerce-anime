@@ -15,8 +15,8 @@ const {
 } = Object.assign({}, defaultController.controller('./panier/panier.model'), require('./panier.controller'));
 
 router
-    .route('/valid/:id')
-    .post(validate);
+    .route('/validate')
+    .post(catchErrors(userCheck), validate);
 
 router
     .route('/')
